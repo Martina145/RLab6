@@ -1,24 +1,24 @@
-\name{knapsack_package-package}
-\alias{knapsack_package-package}
-\alias{knapsack_package}
+\name{knapsack-package}
+\alias{knapsack-package}
+\alias{knapsack}
 \docType{package}
 \title{
-\packageTitle{knapsack_package}
+\packageTitle{knapsack}
 }
 \description{
-\packageDescription{knapsack_package}
+\packageDescription{knapsack}
 }
 \details{
 
 The DESCRIPTION file:
-\packageDESCRIPTION{knapsack_package}
-\packageIndices{knapsack_package}
+\packageDESCRIPTION{knapsack}
+\packageIndices{knapsack}
 ~~ An overview of how to use the package, including the most important functions ~~
 }
 \author{
-\packageAuthor{knapsack_package}
+\packageAuthor{knapsack}
 
-Maintainer: \packageMaintainer{knapsack_package}
+Maintainer: \packageMaintainer{knapsack}
 }
 \references{
 ~~ Literature or other references for background information ~~
