@@ -7,8 +7,19 @@ knapsack_objects <-
   )
 
 
+# Use intToBits() instead
+
 
 knapsack_brute_force <- function(x,W){
+  if ( is.data.frame(x) != TRUE && ncol(x) != 2 && colnames(x)!=c("w","v")) {
+    stop("x is not a data.frame with two variables w and v")
+  }
+  if ( is.numeric(W) != TRUE && W < 0  ) {
+    stop("Not numeric and/or positive W")
+  }
+  if ( any(x$w < 0)  || any(x$v < 0)) {
+    stop("Not only positive values in data.frame")
+  }
   K<-matrix(NA,nrow=W+1,ncol=dim(x)[1]+1)
   0->K[1,]->K[,1]
   matrix_item<-matrix(0,nrow=W+1,ncol=dim(x)[1]+1)
