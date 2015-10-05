@@ -11,10 +11,13 @@ knapsack_objects <-
 
 
 knapsack_brute_force <- function(x,W){
-  if ( is.data.frame(x) != TRUE && ncol(x) != 2 && colnames(x)!=c("w","v")) {
-    stop("x is not a data.frame with two variables w and v")
+  if ( is.data.frame(x) != TRUE ) {
+    stop("x is not a data.frame")
   }
-  if ( is.numeric(W) != TRUE && W < 0  ) {
+  if ( (ncol(x) != 2) || all(colnames(x)==c("w","v"))==FALSE  ) {
+    stop("x dont have two variables w and v")
+  }
+  if ( is.numeric(W) != TRUE || W < 0  ) {
     stop("Not numeric and/or positive W")
   }
   if ( any(x$w < 0)  || any(x$v < 0)) {

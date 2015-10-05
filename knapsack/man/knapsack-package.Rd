@@ -1,35 +1,33 @@
 \name{knapsack-package}
 \alias{knapsack-package}
-\alias{knapsack}
 \docType{package}
 \title{
-\packageTitle{knapsack}
+Knapsack
 }
 \description{
-\packageDescription{knapsack}
+Contain tree different functions to solve the knapsack problem.
 }
+
 \details{
+\tabular{ll}{
+Package: \tab knapsack \cr
+Type: \tab Package \cr
+Version: \tab 1.0\cr
+Date: \tab 2015-10-01\cr
+}}
 
-The DESCRIPTION file:
-\packageDESCRIPTION{knapsack}
-\packageIndices{knapsack}
-~~ An overview of how to use the package, including the most important functions ~~
-}
+
+
 \author{
-\packageAuthor{knapsack}
+Martina Sandberg <marsa505@student.liu.se>
 
-Maintainer: \packageMaintainer{knapsack}
+Caroline Svahn <carsv733@student.liu.se>
 }
+
 \references{
-~~ Literature or other references for background information ~~
+\url{https://en.wikipedia.org/wiki/Knapsack_problem}
 }
-~~ Optionally other standard keywords, one per line, from file KEYWORDS in the R ~~
-~~ documentation directory ~~
-\keyword{ package }
-\seealso{
-~~ Optional links to other man pages, e.g. ~~
-~~ \code{\link[<pkg>:<pkg>-package]{<pkg>}} ~~
-}
-\examples{
-~~ simple examples of the most important functions ~~
-}
+
+\keyword{knapsack}
+
+

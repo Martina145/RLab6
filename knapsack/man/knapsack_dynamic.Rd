@@ -1,60 +1,39 @@
 \name{knapsack_dynamic}
 \alias{knapsack_dynamic}
-%- Also NEED an '\alias' for EACH other topic documented here.
+
 \title{
-~~function to do ... ~~
+Dynamic programming
 }
 \description{
-%%  ~~ A concise (1-5 lines) description of what the function does. ~~
+Knapsack problem solved by Dynamic programming
 }
 \usage{
 knapsack_dynamic(x, W)
 }
-%- maybe also 'usage' for other objects documented here.
 \arguments{
-  \item{x}{
-%%     ~~Describe \code{x} here~~
+  \item{x}{data frame with two variables, "w"=weigth and "v"=value for the items. }
+  \item{W}{limited weight for the knapsack.}
 }
-  \item{W}{
-%%     ~~Describe \code{W} here~~
-}
-}
-\details{
-%%  ~~ If necessary, more details than the description above ~~
-}
+
 \value{
-%%  ~Describe the value returned
-%%  If it is a LIST, use
-%%  \item{comp1 }{Description of 'comp1'}
-%%  \item{comp2 }{Description of 'comp2'}
-%% ...
-}
-\references{
-%% ~put references to the literature/web site here ~
-}
-\author{
-%%  ~~who you are~~
-}
-\note{
-%%  ~~further notes~~
+Returns a list with the items packed in the knapsack and their summed value.
 }
 
-%% ~Make other sections like Warning with \section{Warning }{....} ~
-
-\seealso{
-%% ~~objects to See Also as \code{\link{help}}, ~~~
-}
 \examples{
-##---- Should be DIRECTLY executable !! ----
-##-- ==>  Define data, use random,
-##--	or do  help(data=index)  for the standard data sets.
+set.seed(42)
+n <- 8
+knapsack_objects <-
+  data.frame(
+    w=sample(1:4000, size = n, replace = TRUE),
+    v=runif(n = n, 0, 10000)
+  )
 
-## The function is currently defined as
-function (x, W) 
-{
-  }
+knapsack_dynamic(x = knapsack_objects, W = 3500)
 }
-% Add one or more standard keywords, see file 'KEYWORDS' in the
-% R documentation directory.
-\keyword{ ~kwd1 }
-\keyword{ ~kwd2 }% __ONLY ONE__ keyword per line
+
+
+
+
+\keyword{Dynamic}
+
+
