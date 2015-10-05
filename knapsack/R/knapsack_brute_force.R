@@ -23,47 +23,43 @@ knapsack_brute_force <- function(x,W){
   if ( any(x$w < 0)  || any(x$v < 0)) {
     stop("Not only positive values in data.frame")
   }
-  K<-matrix(NA,nrow=W+1,ncol=dim(x)[1]+1)
-  0->K[1,]->K[,1]
-  matrix_item<-matrix(0,nrow=W+1,ncol=dim(x)[1]+1)
-  for(j in 1:dim(x)[1]) {
-    for(w in 1:W) {
-      wj<-x$w[j]
-      item<-j
-      value<-x$v[j]
-      if( wj > w ) {
-        K[w+1,j+1]<-K[w+1,j]
-        matrix_item[w+1,j+1]<-matrix_item[w+1,j]
+  m <- matrix(0,nrow=W+1,ncol=dim(x)[1]+1)
+  m_item <- matrix(rep(0,(n+1)*(W+1)), W+1,n+1)
+  for(i in 1:dim(x)[1]) {
+    for(j in 1:W) {
+      if( x$w[i] > j ) {
+        m[j+1,i+1]<-m[j+1,i]
+        m_item[j+1,i+1]<-m_item[j+1,i]
       } else {
-        if( K[w+1,j] >= K[w+1-wj,j]+value ) {
-          K[w+1,j+1]<-K[w+1,j]
-          matrix_item[w+1,j+1]<-matrix_item[w+1,j]          
+        if( m[j+1,i] >= m[j+1-x$w[i],i]+x$v[i] ) {
+          m[j+1,i+1]<-m[j+1,i]
+          m_item[j+1,i+1]<-m_item[j+1,i]          
         } else {
-          K[w+1,j+1]<-K[w+1-wj,j]+value
-          matrix_item[w+1,j+1]<-item
+          m[j+1,i+1]<-m[j+1-x$w[i],i]+x$v[i]
+          m_item[j+1,i+1]<-i
         }
       }
     }
   }
-  W <- dim(K)[1]
-  itens <- c()
-  col <- dim(K)[2]
-  selected_item <- matrix_item[W,col]
+  W <- dim(m)[1]
+  items <- c()
+  col <- dim(m)[2]
+  selected_item <- m_item[W,col]
   while(selected_item!=0) {
-    selected_item<-matrix_item[W,col]
+    selected_item <- m_item[W,col]
     if(selected_item!=0) {
-      selected_item_value<-x[as.numeric(rownames(x)) == selected_item,]
-      if(-K[W - selected_item_value$w,col-1]+K[W,col]==selected_item_value$v) {
+      selected_item_value <- x[as.numeric(rownames(x)) == selected_item,]
+      if(-m[W - selected_item_value$w,col-1]+m[W,col]==selected_item_value$v) {
         W <- W - selected_item_value$w
-        itens<-c(itens,selected_item)
+        items <- c(items,selected_item)
       }
       col <- col - 1
     }
   }
-  return(list(value=round(sum(x[itens,]$v)), elements=sort(itens)))
+  return(list(value=round(sum(x[items,]$v)), elements=sort(items)))
 }
 
 
-#knapsack_brute_force(x = knapsack_objects[1:8,], W = 3500)
-#knapsack_brute_force(x = knapsack_objects[1:12,], W = 2000)
+knapsack_brute_force(x = knapsack_objects[1:8,], W = 3500)
+knapsack_brute_force(x = knapsack_objects[1:12,], W = 2000)
 
