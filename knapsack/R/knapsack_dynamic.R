@@ -6,21 +6,56 @@ knapsack_objects <-
     v=runif(n = n, 0, 10000))
 
 knapsack_dynamic <- function(x,W){
- 
+  
   n <- length(x$v)
+  elements <- rep(0, n)
   m <- matrix(rep(0,(n+1)*(W+1)), n+1, W+1)
-  elements <- numeric()
+  items <- n
+  weight <- W
+  
+  #probably a bottlekneck!
   for (i in 1:n) { #hoppar över raden med n=0 element
     for (j in 1:W) { #hoppar över kolumnen med W=0
       if (x$w[i] <= j) {
         m[i+1,j+1] <- max(m[i,j+1],(m[i,j-x$w[i]+1]+x$v[i]))
-        if (m[i,j+1]<(m[i,j-x$w[i]+1]+x$v[i]) && !i%in%elements) {
-          elements<-append(elements,i)
-        }
       } else {
         m[i+1,j+1] <- m[i, j+1]
       }
     }
   }
- return(list(value=round(m[nrow(m),ncol(m)]), elements=elements))
+  
+  value <- m[nrow(m), ncol(m)]
+  temp <- value
+  binary <- rep(0, n)
+  items <- n
+  weight <- W
+  
+  while(temp > 0) {
+    while(m[items+1,weight+1] == temp) {
+      items <- items - 1
+    }
+    items <- items + 1
+    binary[items] <- 1
+    weight <- weight - x$w[items]
+    items <- items - 1
+    temp <- m[items+1,weight+1]
+  }
+  
+  elements <- numeric()
+  for (i in seq(length(binary))) {
+    if (binary[i]==1) {
+      elements <- append(elements, i)
+    }
+  }
+  return(list(value=round(value), elements=elements))
 }
+
+# install rtools, load it
+# install.packages("devtools")
+# library(devtools)
+# devtools::install_github("hadley/lineprof")
+
+source(find_ex(knapsack_dynamic(x = knapsack_objects[1:12,], W = 2000)))
+
+profile <- lineprof(knapsack_dynamic(x = knapsack_objects[1:12,], W = 2000))
+shine(profile)
