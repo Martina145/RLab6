@@ -24,6 +24,7 @@ knapsack_dynamic <- function(x,W){
   m <- matrix(rep(0,(n+1)*(W+1)), n+1, W+1)
   items <- n
   weight <- W
+  binary <- rep(0, n)
   
   #probably a bottlekneck!
   for (i in 1:n) { #hoppar över raden med n=0 element
@@ -38,9 +39,6 @@ knapsack_dynamic <- function(x,W){
   
   value <- m[nrow(m), ncol(m)]
   temp <- value
-  binary <- rep(0, n)
-  items <- n
-  weight <- W
   
   while(temp > 0) {
     while(m[items+1,weight+1] == temp) {
@@ -52,13 +50,16 @@ knapsack_dynamic <- function(x,W){
     items <- items - 1
     temp <- m[items+1,weight+1]
   }
-  
-  elements <- numeric()
+  #pre-allocated vector instead of append() to avoid duplicates, 0.57/0.58
+  #Tried using n instead of seq(length(x)), no evident gain
+  elements <- numeric(length(x$v))
   for (i in seq(length(binary))) {
     if (binary[i]==1) {
-      elements <- append(elements, i)
+      elements[i] <- i
     }
   }
+  #subsetting the elements to gain
+  elements <- elements[!elements%in%0]
   return(list(value=round(value), elements=elements))
 }
 

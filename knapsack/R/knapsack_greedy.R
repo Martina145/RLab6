@@ -28,12 +28,11 @@ knapsack_greedy <- function(x,W,fast=FALSE){
   return valuePW;}')
     valuePW <- temp(x$v,x$w,length(x$v))
   } else {
-    valuePW <- numeric(length(x$v))
-    for (i in seq(length(x$v))) {
-      valuePW[i] <- x$v[i]/x$w[i]
+    #used function instead of loop, 0/0.05
+    f <- function(x) x$v/x$w
+    valuePW <- f(x)
   }
-  }
-
+  
   sorted <- matrix(c(x$v, x$w, valuePW), ncol=3)
   sorted <- sorted[order(-sorted[,3]),]
   value<-0
