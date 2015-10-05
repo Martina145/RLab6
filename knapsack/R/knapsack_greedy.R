@@ -1,4 +1,17 @@
 knapsack_greedy <- function(x,W){
+  if ( is.data.frame(x) != TRUE ) {
+    stop("x is not a data.frame")
+  }
+  if ( (ncol(x) != 2) || all(colnames(x)==c("w","v"))==FALSE  ) {
+    stop("x dont have two variables w and v")
+  }
+  if ( is.numeric(W) != TRUE || W < 0  ) {
+    stop("Not numeric and/or positive W")
+  }
+  if ( any(x$w < 0)  || any(x$v < 0)) {
+    stop("Not only positive values in data.frame")
+  }
+  
   valuePW <- numeric(length(x$v))
   for (i in seq(length(x$v))) {
     valuePW[i] <- x$v[i]/x$w[i]
