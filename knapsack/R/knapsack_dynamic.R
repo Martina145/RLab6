@@ -6,6 +6,18 @@ knapsack_objects <-
     v=runif(n = n, 0, 10000))
 
 knapsack_dynamic <- function(x,W){
+  if ( is.data.frame(x) != TRUE ) {
+    stop("x is not a data.frame")
+  }
+  if ( (ncol(x) != 2) || all(colnames(x)==c("w","v"))==FALSE  ) {
+    stop("x dont have two variables w and v")
+  }
+  if ( is.numeric(W) != TRUE || W < 0  ) {
+    stop("Not numeric and/or positive W")
+  }
+  if ( any(x$w < 0)  || any(x$v < 0)) {
+    stop("Not only positive values in data.frame")
+  }
   
   n <- length(x$v)
   elements <- rep(0, n)
@@ -55,7 +67,7 @@ knapsack_dynamic <- function(x,W){
 # library(devtools)
 # devtools::install_github("hadley/lineprof")
 
-source(find_ex(knapsack_dynamic(x = knapsack_objects[1:12,], W = 2000)))
+#source(find_ex(knapsack_dynamic(x = knapsack_objects[1:12,], W = 2000)))
 
-profile <- lineprof(knapsack_dynamic(x = knapsack_objects[1:12,], W = 2000))
-shine(profile)
+#profile <- lineprof(knapsack_dynamic(x = knapsack_objects[1:12,], W = 2000))
+#shine(profile)
