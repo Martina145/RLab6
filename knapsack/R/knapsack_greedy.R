@@ -1,4 +1,12 @@
-knapsack_greedy <- function(x,W){
+set.seed(42)
+n <- 1000000
+x <-
+  data.frame(
+    w=sample(1:4000, size = n, replace = TRUE),
+    v=runif(n = n, 0, 10000)
+  )
+
+knapsack_greedy <- function(x,W,fast=FALSE){
   if ( is.data.frame(x) != TRUE ) {
     stop("x is not a data.frame")
   }
@@ -11,12 +19,21 @@ knapsack_greedy <- function(x,W){
   if ( any(x$w < 0)  || any(x$v < 0)) {
     stop("Not only positive values in data.frame")
   }
-  
-  valuePW <- numeric(length(x$v))
-  for (i in seq(length(x$v))) {
-    valuePW[i] <- x$v[i]/x$w[i]
+  if (fast==TRUE){
+    cppFunction(code = 'NumericVector temp(NumericVector value, NumericVector weight, int n){
+  NumericVector valuePW(n);
+    for(int i = 0; i <= n; i++){
+       valuePW[i] = value[i]/weight[i];
+    }
+  return valuePW;}')
+    valuePW <- temp(x$v,x$w,length(x$v))
+  } else {
+    valuePW <- numeric(length(x$v))
+    for (i in seq(length(x$v))) {
+      valuePW[i] <- x$v[i]/x$w[i]
   }
-  
+  }
+
   sorted <- matrix(c(x$v, x$w, valuePW), ncol=3)
   sorted <- sorted[order(-sorted[,3]),]
   value<-0

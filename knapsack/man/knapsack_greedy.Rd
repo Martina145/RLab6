@@ -8,11 +8,12 @@ Greedy heuristic
 Knapsack problem solved by Greedy heuristic
 }
 \usage{
-knapsack_greedy(x, W)
+knapsack_greedy(x, W, fast)
 }
 \arguments{
   \item{x}{data frame with two variables, "w"=weigth and "v"=value for the items. }
   \item{W}{limited weight for the knapsack.}
+  \item{fast}{logical. Run faster code.}
 }
 
 \value{
