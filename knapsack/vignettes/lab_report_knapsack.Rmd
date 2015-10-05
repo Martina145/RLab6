@@ -9,61 +9,14 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
-Vignettes are long form documentation commonly included in packages. Because they are part of the distribution of the package, they need to be as compact as possible. The `html_vignette` output type provides a custom style sheet (and tweaks some options) to ensure that the resulting html is as small as possible. The `html_vignette` format:
-
-- Never uses retina figures
-- Has a smaller default figure size
-- Uses a custom CSS stylesheet instead of the default Twitter Bootstrap style
-
 ## Answers to questions
 
-1) To run `knapsack_brute_force()` with n=16 before optimization took 3 seconds.
+1) To run `knapsack_brute_force()` with W=3500 and n=16 before optimization took 3 seconds.
  
-2) `knapsack_dynamic()` took 83.24 seconds with n=500 and
+2) `knapsack_dynamic()` took 83.24 seconds with W=3500 and n=500 and
 
-3) `knapsack_greedy()` with n=1000000 required 134.34 seconds.
+3) `knapsack_greedy()` with W=3500 and n=1000000 required 86.10 seconds.
 
-4)
+4) 
 
-5)
-
-6)
-
-## Styles
-
-The `html_vignette` template includes a basic CSS theme. To override this theme you can specify your own CSS in the document metadata as follows:
-
-    output: 
-      rmarkdown::html_vignette:
-        css: mystyles.css
-
-## Figures
-
-The figure sizes have been customised so that you can easily put two images side-by-side. 
-
-```{r, fig.show='hold'}
-plot(1:10)
-plot(10:1)
-```
-
-You can enable figure captions by `fig_caption: yes` in YAML:
-
-    output:
-      rmarkdown::html_vignette:
-        fig_caption: yes
-
-Then you can use the chunk option `fig.cap = "Your figure caption."` in **knitr**.
-
-## More Examples
-
-You can write math expressions, e.g. $Y = X\beta + \epsilon$, footnotes^[A footnote here.], and tables, e.g. using `knitr::kable()`.
-
-```{r, echo=FALSE, results='asis'}
-knitr::kable(head(mtcars, 10))
-```
-
-
-Also a quote using `>`:
-
-> "He who gives up [code] safety for [code] speed deserves neither."
-([via](https://twitter.com/hadleywickham/status/504368538874703872))
+5) After using `Rcpp` and `C++` in `knapsack_greedy()` it takes 44.94 seconds with W=3500 and n=1000000. So the performance gain is 41.16 seconds.

@@ -9,5 +9,5 @@ Author: c(
     person("Caroline", "Svahn", email = "carsv733@student.liu.se", role = "aut"))
 Description: Contain tree different functions to solve the knapsack problem.
 License: What license is it under?
-Suggests: knitr, rmarkdown, testthat
+Suggests: knitr, rmarkdown, testthat, Rcpp
 VignetteBuilder: knitr
