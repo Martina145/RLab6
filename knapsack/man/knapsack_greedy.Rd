@@ -8,7 +8,7 @@ Greedy heuristic
 Knapsack problem solved by Greedy heuristic
 }
 \usage{
-knapsack_greedy(x, W, fast)
+knapsack_greedy(x, W, fast=FALSE)
 }
 \arguments{
   \item{x}{data frame with two variables, "w"=weigth and "v"=value for the items. }

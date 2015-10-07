@@ -1,17 +1,28 @@
-set.seed(42)
-n <- 2000
-knapsack_objects <-
-  data.frame(
-    w=sample(1:4000, size = n, replace = TRUE),
-    v=runif(n = n, 0, 10000)
-  )
 
 test_that("Returns the right values", {
+  set.seed(42)
+  n <- 2000
+  knapsack_objects <-
+    data.frame(
+      w=sample(1:4000, size = n, replace = TRUE),
+      v=runif(n = n, 0, 10000)
+    )
+  
+  
   expect_that(knapsack_brute_force(x = knapsack_objects[1:8,], W = 3500),equals(list(value=16770,elements=c(5,8))))
   expect_that(knapsack_brute_force(x = knapsack_objects[1:12,], W = 2000),equals(list(value=15428,elements=c(3,8))))
 })
 
 test_that("Returns an error", {
+  set.seed(42)
+  n <- 2000
+  knapsack_objects <-
+    data.frame(
+      w=sample(1:4000, size = n, replace = TRUE),
+      v=runif(n = n, 0, 10000)
+    )
+  
+  
   expect_that(knapsack_brute_force(x = 5, W = 3500),
               throws_error("x is not a data.frame"))
   

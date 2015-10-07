@@ -23,6 +23,7 @@ knapsack_brute_force <- function(x,W){
   if ( any(x$w < 0)  || any(x$v < 0)) {
     stop("Not only positive values in data.frame")
   }
+  n <- length(x$v)
   m <- matrix(0,nrow=W+1,ncol=dim(x)[1]+1)
   m_item <- matrix(rep(0,(n+1)*(W+1)), W+1,n+1)
   for(i in 1:dim(x)[1]) {
