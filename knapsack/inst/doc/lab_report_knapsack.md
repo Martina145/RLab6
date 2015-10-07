@@ -1,7 +1,7 @@
 ---
 title: "Knapsack"
 author: "Caroline Svahn & Martina Sandberg"
-date: "`r Sys.Date()`"
+date: "2015-10-07"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{Vignette Title}
