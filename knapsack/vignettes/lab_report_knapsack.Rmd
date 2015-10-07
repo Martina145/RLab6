@@ -17,6 +17,6 @@ vignette: >
 
 3) `knapsack_greedy()` with W=3500 and n=1000000 required 86.10 seconds.
 
-4) 
+4) Trying to improve the code performance without `C++` did not have much effect - at least not consistant. Functions within the functions were used to avoid looping over matrices and vectors and efforts to maximize the effectiveness of the remaining loops were made but the results are not definite since `system.time()`returned various results. Instead, we relied on implementing `C++`.
 
 5) After using `Rcpp` and `C++` in `knapsack_greedy()` it takes 44.94 seconds with W=3500 and n=1000000. So the performance gain is 41.16 seconds.
